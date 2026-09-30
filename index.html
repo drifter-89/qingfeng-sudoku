@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f3f7f4" />
+    <meta name="description" content="一个简约、清新的本地数独游戏" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="清风数独" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png" />
+    <title>清风数独</title>
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <div>
+            <h1>清风数独</h1>
+            <p>静下来，解开这一局</p>
+          </div>
+        </div>
+        <button class="ghost-button" id="new-game-button" type="button">新游戏</button>
+      </header>
+
+      <section class="game-card" aria-label="数独游戏">
+        <div class="game-meta">
+          <button class="difficulty-pill" id="difficulty-button" type="button" aria-label="切换难度">
+            <span id="difficulty-label">中等</span><span aria-hidden="true">⌄</span>
+          </button>
+          <div class="stats">
+            <div><span>错误</span><strong id="mistakes">0</strong></div>
+            <div><span>提示</span><strong id="hints">3</strong></div>
+            <div><span>时间</span><strong id="timer">00:00</strong></div>
+          </div>
+        </div>
+
+        <div class="board-wrap">
+          <div class="board" id="board" role="grid" aria-label="九乘九数独棋盘"></div>
+          <button class="pause-cover" id="pause-cover" type="button" hidden>
+            <span class="pause-icon">▶</span>
+            <strong>继续游戏</strong>
+            <small>计时已暂停</small>
+          </button>
+        </div>
+
+        <div class="number-pad" id="number-pad" aria-label="数字键盘"></div>
+
+        <div class="toolbar" aria-label="游戏工具">
+          <button type="button" data-action="undo"><span aria-hidden="true">↶</span><small>撤销</small></button>
+          <button type="button" data-action="erase"><span aria-hidden="true">⌫</span><small>擦除</small></button>
+          <button type="button" data-action="notes" aria-pressed="false">
+            <span aria-hidden="true">✎</span><small>笔记</small><b id="notes-badge">关</b>
+          </button>
+          <button type="button" data-action="hint"><span aria-hidden="true">◇</span><small>提示</small></button>
+          <button type="button" data-action="pause"><span aria-hidden="true">Ⅱ</span><small>暂停</small></button>
+        </div>
+      </section>
+
+      <aside class="install-tip" id="install-tip" hidden>
+        <span class="install-tip-icon" aria-hidden="true">↥</span>
+        <p><strong>放到 iPhone 桌面</strong><small>点 Safari 的分享按钮，再选“添加到主屏幕”</small></p>
+        <button type="button" id="dismiss-install-tip" aria-label="关闭安装提示">×</button>
+      </aside>
+
+      <p class="shortcut-tip">支持键盘数字键、方向键、Delete 和 N</p>
+    </main>
+
+    <dialog id="new-game-dialog" class="dialog">
+      <form method="dialog">
+        <button class="dialog-close" value="cancel" aria-label="关闭">×</button>
+        <div class="dialog-symbol" aria-hidden="true">✦</div>
+        <h2>开始新游戏</h2>
+        <p>选择一个适合此刻的难度</p>
+        <div class="difficulty-list">
+          <button value="easy" data-start="easy"><span>简单</span><small>轻松热身</small></button>
+          <button value="medium" data-start="medium"><span>中等</span><small>专注片刻</small></button>
+          <button value="hard" data-start="hard"><span>困难</span><small>享受挑战</small></button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="complete-dialog" class="dialog complete-dialog">
+      <form method="dialog">
+        <div class="celebration" aria-hidden="true">✦</div>
+        <p class="eyebrow">完成挑战</p>
+        <h2>漂亮的一局！</h2>
+        <p id="complete-copy">你完成了这道数独。</p>
+        <div class="result-grid">
+          <div><span>用时</span><strong id="result-time">00:00</strong></div>
+          <div><span>错误</span><strong id="result-mistakes">0</strong></div>
+          <div><span>最佳</span><strong id="result-best">--:--</strong></div>
+        </div>
+        <button class="primary-button" value="new" id="complete-new-game">再来一局</button>
+        <button class="text-button" value="close">看看棋盘</button>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
