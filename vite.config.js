@@ -13,16 +13,16 @@ export default defineConfig({
         'icons/favicon-32x32.png',
       ],
       manifest: {
-        name: '清风数独',
-        short_name: '清风数独',
-        description: '一个简约、清新、可以离线玩的数独游戏',
+        name: '黄金数独 · Bucciarati Edition',
+        short_name: '黄金数独',
+        description: '布加拉提主题、可以离线玩的数独游戏',
         lang: 'zh-CN',
         start_url: './',
         scope: './',
         display: 'standalone',
         orientation: 'portrait-primary',
-        background_color: '#f3f7f4',
-        theme_color: '#4d9e86',
+        background_color: '#120d1f',
+        theme_color: '#1a102b',
         categories: ['games', 'puzzle'],
         icons: [
           {
