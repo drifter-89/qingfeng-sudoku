@@ -146,7 +146,6 @@ function snapshot() {
     board: [...state.board],
     notes: state.notes.map((notes) => [...notes]),
     mistakes: state.mistakes,
-    hintsLeft: state.hintsLeft,
   });
   if (state.history.length > 100) state.history.shift();
 }
@@ -200,7 +199,11 @@ function undo() {
   if (state.status !== 'playing') return;
   const previous = state.history.pop();
   if (!previous) return showToast('还没有可以撤销的操作');
+  // 撤销只还原棋盘操作，已经消耗的提示次数不能返还。
+  // 单独保留当前值，也兼容旧版本存档中含有 hintsLeft 的历史记录。
+  const hintsLeft = state.hintsLeft;
   Object.assign(state, previous);
+  state.hintsLeft = hintsLeft;
   saveGame();
   render();
 }
